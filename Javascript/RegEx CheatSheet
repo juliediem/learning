@@ -1,0 +1,33 @@
+# Regex Cheatsheet
+- Literal searches, just enclose with / like this /string/
+- | --> an OR operator for matches
+- /i --> If you need to do a case sensitive search put an i at the end of your search term like this: /string/i
+- .test() --> You can perform a check that returns a boolean if the search term exists --> searchTerm.test(stringToSearch)
+- .match() --> To extract matched expression --> stringToSearch.match(searchTerm)
+- /g --> To return every instance of a word match in an array --> /string/g --> i.e. ["Match","Match","Match"]
+- . --> wildcard character that can match any character
+- [] --> characters in this position can be used to match; i.e. b[aeu]ll can match with ball, bell, bull
+- [a-z] --> match a range of alphabetical characters
+- [0-5] --> match any range of numbers
+- You can combine the above two like this [a-d2-10] -> this says that any letter a-d or numbers 2-10 can be found in this position
+- [^] --> Equivalent of NOT; put this before a pattern to indicate that you don't want to return anything that matches this pattern, only applied enclosed in [] character set
+- /+/ --> If pattern shows up consecutively for a match of 1 or more of a specified character, it will be returned as a match but in a group. If pattern is not consecutive, it will show up as separate matches. I.e. /s+/ for Mississpi returns match of ["ss","ss"]
+- /*/ --> the star sign can return a match for 0 or more occurrences of a specified character, like the addition sign, it will lump together any instances that are grouped together; i.e. /Ow*/ will match on Owwwwwwwwwww as "Owwwwwwwwwww" and Oww on "Oww" and O on "O"; note that it is for ZERO or more occurences, so if there isn't any of that character, a match can still return of the previous characters match
+- ? --> Use question mark to return a lazy match. Lazy match returns the shortest possible string, whereas a greedy match returns the longest combination of a pattern possible. I.e. /t[a-z]*i/ returns "titani" from "titanic"  &  /t[a-z]*?i/ returns "ti"
+- /^/ --> Find matches for beginning of string
+- /...$/ --> Find matches for end of string
+- /\w/ --> equivalent of /[A-Za-z0-9_]/ meaning this is shorthand to search for alphanumerics as well as the underscore symbol
+- /\W/ --> is the opposite of the above
+- /\d/ --> look for all number (digit) characters = [0-9]
+- /\D/ -->exclude all numbers = [^0-9]
+- \s --> searches for whitespaces, tab, carriage return, form feed, new line characters
+- \S --> does not search for the above similar to [^ \r\t\f\n\v]
+- {#,#} --> Like the +,*, except you can specify your own number range. I.e. {3,5} Occurence of consecutive characters between 3 to 5 times; you can leave number field blank
+- {#} --> If you want a specific number of matches
+- /?/ --> checks for 0 or more occurences of the previous character; I.e. Color vs Colour /Colou?r/
+- (?=...) --> Look ahead to check for pattern without matching; Useful for things like password checker
+- (?!...) --> Look ahead to check that pattern doesn't exist without matching
+- () --> Check group of characters
+- \# --> Capture Groups are enclosed in (), you can reference the same pattern again by their number position as shorthand. Note if you want to follow an exact pattern's positions, ensure you incorporate ^ and $. Capture positions start at 1.
+- .replace(regExPattern,"newStringToReplace")
+- .replace() can assess capture groups as well, but instead of \#, you'd do $# 
