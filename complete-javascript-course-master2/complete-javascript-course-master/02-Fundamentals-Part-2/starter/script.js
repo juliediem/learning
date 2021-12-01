@@ -85,3 +85,6 @@ console.log(fruitProcessor(2,3));
 
 
 
+/*Coding Challenge #1*/
+
+const calcAverage=(score1,score2,score3)=>(score1+score2+score3)/3
