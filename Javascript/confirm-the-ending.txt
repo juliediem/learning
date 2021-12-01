@@ -1,0 +1,18 @@
+function confirmEnding(str, target) {
+  let arraystr=Array.from(str);
+  let arrayTarget=Array.from(target);
+  let arrayLength=arraystr.length;
+  let targLength=target.length;
+  let startIndex=arrayLength-targLength;
+
+  arraystr.splice(startIndex, targLength, ...arrayTarget);
+  let newArr=arraystr.join('');
+
+  console.log(str);
+  console.log(newArr);
+  return (str==newArr) ? true:false;
+}
+
+confirmEnding("Bastian", "n");
+confirmEnding("Congratulation", "on");
+confirmEnding("Walking on water and developing software from a specification are easy if both are frozen", "specification");
