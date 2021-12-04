@@ -5,61 +5,60 @@
 //The following two lines do the same thing
 //El--> Element
 //We are defining all the elements once first so that we don't have to call them each time later
-const player0El=document.querySelector('.player--0');
-const player1El=document.querySelector('.player--1');
-const score0El=document.querySelector('#score--0');
-const score1El=document.getElementById('score--1');
-const current0El=document.getElementById('current--0');
-const current1El=document.getElementById('current--1');
-const diceEl=document.querySelector('.dice');
-const btnNew=document.querySelector('.btn--new');
-const btnRoll=document.querySelector('.btn--roll');
-const btnHold=document.querySelector('.btn--hold');
+const player0El = document.querySelector('.player--0');
+const player1El = document.querySelector('.player--1');
+const score0El = document.querySelector('#score--0');
+const score1El = document.getElementById('score--1');
+const current0El = document.getElementById('current--0');
+const current1El = document.getElementById('current--1');
+const diceEl = document.querySelector('.dice');
+const btnNew = document.querySelector('.btn--new');
+const btnRoll = document.querySelector('.btn--roll');
+const btnHold = document.querySelector('.btn--hold');
 
-
-let playing = true;
-//Scores are stored in array
-let scores = [0, 0];
-let currentScore = 0;
-//First player is 0, and second one is 1
-let activePlayer = 0;
+//If you are initializing empty variables, you can simply write the name and separate the variables with a comma
+let scores, currentScore, activePlayer, playing;
 
 //Starting Conditions
 const startConditions = function () {
+  //Scores are stored in an array
+  scores = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+
   score0El.textContent = 0;
   score1El.textContent = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+
   diceEl.classList.add('hidden');
-  playing=true;
-  scores=[0,0];
-  currentScore=0;
-  current0El.textContent=0;
-  current1El.textContent=0;
-  activePlayer=0;
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
 };
 
 startConditions();
 
-
-
 //Function for switching players
 
-const switchPlayer=function() {
-    //Switch to next player
-    //Reset Current Score back to 0
-    document.getElementById(`current--${activePlayer}`).textContent=0;
-    //Reset the current score to 0 in a local variable
-    currentScore=0;
-    //Switch to other player
-    activePlayer=activePlayer===0?1:0;
-    //Toggle add class if it's not there, and remove class if it is there
-    player0El.classList.toggle('player--active');
-    player1El.classList.toggle('player--active');
+const switchPlayer = function () {
+  //Switch to next player
+  //Reset Current Score back to 0
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  //Reset the current score to 0 in a local variable
+  currentScore = 0;
+  //Switch to other player
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  //Toggle add class if it's not there, and remove class if it is there
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
 };
-
 
 //Listen to roll dice button
 btnRoll.addEventListener('click', function () {
-//None of the code will execute if playing is false;
+  //None of the code will execute if playing is false;
   if (playing) {
     //1. Generate Random Dice Roll
     //This is not a global variable because each time you roll the die, if should generate a new number
@@ -80,7 +79,7 @@ btnRoll.addEventListener('click', function () {
     } else {
       switchPlayer();
     }
-  } 
+  }
 });
 
 btnHold.addEventListener('click', function () {
@@ -108,11 +107,21 @@ btnHold.addEventListener('click', function () {
   }
 });
 
+// //New Game reset variables
+// btnNew.addEventListener('click', function () {
+//   if (activePlayer === 1) {
+//     player0El.classList.add('player--active');
+//     player1El.classList.remove('player--active');
+//   }
+//   document
+//     .querySelector(`.player--${activePlayer}`)
+//     .classList.remove('player--winner');
 
+//   player0El.classList.add('player--active');
+//   startConditions();
+// });
+
+//If class is already there, or not there already, nothing will happen
 btnNew.addEventListener('click', function () {
-  if (activePlayer===1) {
-    player0El.classList.add('player--active');
-    player1El.classList.remove('player--active');
-  };
   startConditions();
 });

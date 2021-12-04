@@ -1,8 +1,27 @@
 // Remember, we're gonna use strict mode in all scripts now!
 'use strict';
 
-if (x === 234) console.log(23);
+// const calcAge = birthYear => 2021 - birthYear;
 
-const calcAge = birthYear => 2021 - birthYear;
+// console.log(calcAge(1990));
+// console.log('Hello');
 
-console.log(calcAge(1994));
+const measureKelvin = function () {
+  const measurement = {
+    type: 'temp',
+    unit: 'celsius',
+    value: Number(prompt('Degress celsius:')),
+  };
+
+  console.log(measurement);
+  console.table(measurement);
+  console.log(measurement.value);
+  //   console.warn(measurement.value);
+  //   console.error(measurement.value);
+
+  debugger;
+  const kelvin = measurement.value + 273;
+  return kelvin;
+};
+
+console.log(measureKelvin());
